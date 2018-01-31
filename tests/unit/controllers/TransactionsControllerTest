@@ -1,0 +1,33 @@
+<?php
+namespace tests\unit\modules\user\controllers;
+use app\controllers\TransactionsController;
+use Codeception\Test\Unit;
+use yii\web\Controller;
+use app\models\Transactions;
+
+class TransactionsControllerTest extends Unit
+{
+    /**
+     * @var \UnitTester
+     */
+    protected $tester;
+    public function _before()
+    {
+    }
+
+    public function testCorrectCreate()
+    {
+        $model = new Transactions([
+            'sum' => '31',
+        ]);
+        expect('model is valid', $model->validate())->true();
+    }
+
+    public function testWringCreate()
+    {
+        $model = new Transactions([
+            'sum' => 'num',
+        ]);
+        expect('Sum must be a number.', $model->validate())->false();
+    }
+}
